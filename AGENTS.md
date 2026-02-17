@@ -14,9 +14,10 @@ When asked about a topic, enrich it with detailed information from documentation
 
 Chezmoi maintains three states:
 
-- **Source state**: Files in this repo (under `home/` or at repo root) with chezmoi-specific naming
-- **Target state**: The desired state computed from source state, templates, and config
-- **Destination state**: Your actual home directory (`~`)
+- **Source state**: Declares the desired state of your **Destination directory**, through files and templates in `/home` in this repository
+- **Target state**: The desired state of **destination directory** computed from source state
+- **Destination directory**: Your actual home directory managed by chezmoi (`~`)
+- **Destination state**: The actual current state of destination directory
 
 The `chezmoi apply` command reconciles destination state with target state, making minimal necessary changes.
 
@@ -47,7 +48,9 @@ Set in `.chezmoi.toml.tmpl` under `[data]`:
     name = "John Doe"
 ```
 
-Access in templates: `{{ .email }}`, `{{ .name }}`
+Access in templates: `{{ .email }}`, `{{ .name }}`.
+
+They can also be set in `.chezmoidata/` files (JSON/YAML/TOML), but those do not support templating.
 
 ### Data Files
 
@@ -63,6 +66,8 @@ Scripts are files with the `run_` prefix. They execute during `chezmoi apply`.
 
 All scripts should be **idempotent** (safe to run multiple times).
 
+Create them preferably inside `.chezmoiscripts/`, so that they are not copied to target, unless they should specifically be in the target.
+
 ### Modify Scripts
 
 Use `modify_` when you need to merge chezmoi-managed config with user-local changes.
@@ -71,7 +76,7 @@ Changes should be **idempotent** or the file content will be duplicated on each 
 
 ### External Resources
 
-Declare external resources in `.chezmoiexternal.toml` to download automatically.
+Declare external resources in `.chezmoiexternals/` directory to download automatically.
 
 ### Hooks
 
