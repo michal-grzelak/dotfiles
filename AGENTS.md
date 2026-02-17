@@ -23,7 +23,13 @@ The `chezmoi apply` command reconciles destination state with target state, maki
 
 ## File Naming Conventions
 
-Chezmoi uses **attributes** (prefixes and suffixes) to control how files are handled. Multiple prefixes can be combined (order matters).
+Chezmoi uses **attributes** (prefixes and suffixes) to control how files are handled. See docs for all of them. Multiple prefixes can be combined (order matters).
+
+**Use `modify_`** for extensible configs where users add local entries, but beware - they should be **idempotent** or the file content will be duplicated on each run.
+
+**Use `create_` or `empty_`** for ensuring file exists (won't be managed by chezmoi after creation).
+
+**Use `private_`** for sensitive files (SSH keys, credentials).
 
 ## Template System
 
@@ -33,6 +39,10 @@ Docs available at context7:
 
 - Sprig: `/masterminds/sprig`
 - Go: `/websites/go_dev_doc`
+
+Template files have `.tmpl` suffix.
+
+**Use templates** for dynamic content (email, name, machine-specific paths).
 
 ### Built-in Variables
 
@@ -50,7 +60,7 @@ Set in `.chezmoi.toml.tmpl` under `[data]`:
 
 Access in templates: `{{ .email }}`, `{{ .name }}`.
 
-They can also be set in `.chezmoidata/` files (JSON/YAML/TOML), but those do not support templating.
+They can also be set using **Data files**.
 
 ### Data Files
 
@@ -68,15 +78,15 @@ All scripts should be **idempotent** (safe to run multiple times).
 
 Create them preferably inside `.chezmoiscripts/`, so that they are not copied to target, unless they should specifically be in the target.
 
-### Modify Scripts
+Scripts can be rerun (`run_onchange`) when content of another file changes, by using the pattern: `# dconf.ini hash: {{ include "dconf.ini" | sha256sum }}` (example) in the script. This way the script will only run when the hash changes, meaning the content of `dconf.ini` changed.
 
-Use `modify_` when you need to merge chezmoi-managed config with user-local changes.
-
-Changes should be **idempotent** or the file content will be duplicated on each run.
+Scripts can have different formats if **Interpreters** are set up.
 
 ### External Resources
 
 Declare external resources in `.chezmoiexternals/` directory to download automatically.
+
+Prefer directory instead of `.chezmoiexternal.toml` for better organization.
 
 ### Hooks
 
@@ -136,21 +146,10 @@ There are many more commands.
 
 ## Best Practices
 
-1. **Use templates** for dynamic content (email, name, machine-specific paths)
-2. **Use `modify_`** for extensible configs where users add local entries, but beware of making it **idempotent**
-3. **Use `create_` or `empty_`** for ensuring file exists (won't be managed by chezmoi after creation)
-4. **Use `.chezmoiexternal.toml`** for plugins, themes, and third-party code
-5. **Use `run_onchange_`** for declarative package/software installation
-6. **Keep secrets encrypted** - Never commit unencrypted secrets
-7. **Use `private_`** for sensitive files (SSH keys, credentials)
-8. **Use `.chezmoiignore`** to exclude machine-specific or temporary files
-9. **All scripts and `modify_` must be idempotent** - Safe to run multiple times
-10. **Use `before_`/`after_`** scripts for setup/teardown around file updates
-11. **Test with `chezmoi diff`** before applying changes
-12. **Correct shebang**: `#!/usr/bin/env bash` (not `/bin/bash`)
-13. **Prefer `run_onchange_` over `run_once_`** when filename matters for re-execution
-14. **Use data files** in `.chezmoidata/` for machine-specific configuration lists
-15. Each file managed exclusively by chezmoi should have a header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it
+1. **Keep secrets encrypted** - Never commit unencrypted secrets
+2. **Test with `chezmoi diff`** before applying changes
+3. **Correct shebang**: `#!/usr/bin/env bash` (not `/bin/bash`)
+4. Each file managed exclusively by chezmoi should have a header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it
 
 ---
 

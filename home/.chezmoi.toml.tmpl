@@ -2,6 +2,7 @@
 {{- $name := promptStringOnce . "name" "Full name" -}}
 {{- $gitSigningKey := promptStringOnce . "gitSigningKey" "Git signing key (leave empty for no signing)" "" -}}
 {{- $isWsl := .chezmoi.kernel.osrelease | lower | contains "microsoft" -}}
+{{- $isLinux := eq .chezmoi.os "linux" -}}
 
 encryption = "age"
 
@@ -9,8 +10,8 @@ encryption = "age"
     email = {{ $email | quote }}
     name = {{ $name | quote }}
     isWsl = {{ $isWsl }}
-    isLinux = {{ eq .chezmoi.os "linux" }}
-    isLinuxNative = {{ and (eq .chezmoi.os "linux") (not $isWsl) }}
+    isLinux = {{ $isLinux }}
+    isLinuxNative = {{ and $isLinux (not $isWsl) }}
 
     [data.git]
         signingKey = {{ $gitSigningKey | quote }}
