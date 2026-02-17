@@ -1,3 +1,5 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
 # Global tool versions
 [tools]
 node = "lts"

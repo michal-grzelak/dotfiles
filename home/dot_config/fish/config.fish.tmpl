@@ -1,6 +1,4 @@
-{{- $isWsl := .chezmoi.kernel.osrelease | replaceAllRegex ".*[Mm]icrosoft.*" "wsl" | eq "wsl" -}}
-{{- $isLinux := eq .chezmoi.os "linux" -}}
-{{- $isLinuxNative := and $isLinux (not $isWsl) -}}
+{{- /* MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit */ -}}
 
 # Disable greeting
 set -g fish_greeting ""
@@ -8,7 +6,7 @@ set -g fish_greeting ""
 # Editor settings
 set -gx EDITOR nvim
 set -gx VISUAL nvim
-set -gx PAGER less
+set -gx PAGER delta
 
 # Path additions
 fish_add_path -g ~/.local/bin
@@ -49,7 +47,7 @@ set -gx HOMEBREW_NO_INSTALL_CLEANUP 1
 # Linux-specific settings
 set -gx GPG_TTY (tty)
 
-{{-   if $isWsl }}
+{{-   if .isWsl }}
 
 # WSL-specific settings
 set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0

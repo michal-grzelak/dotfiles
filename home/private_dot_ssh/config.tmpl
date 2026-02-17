@@ -1,10 +1,8 @@
-{{- $isWsl := eq .chezmoi.kernel.osrelease ".*microsoft.*" -}}
-{{- $isLinux := eq .chezmoi.os "linux" -}}
-{{- $isLinuxNative := and $isLinux (not $isWsl) -}}
-# Managed by chezmoi - user additions go in ~/.ssh/config.local
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# user additions go in ~/.ssh/config.local
 
 Host *
-{{- if $isLinuxNative }}
+{{- if .isLinuxNative }}
     IdentityAgent ~/.1password/agent.sock
 {{- end }}
     AddKeysToAgent confirm

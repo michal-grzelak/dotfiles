@@ -1,46 +1,12 @@
-{{ if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-# Package installation for macOS
+# Package installation script
 # Uses Homebrew to install packages defined in .chezmoidata/packages.yaml
 
 set -e
 
-echo "=== Installing packages on macOS ==="
-
-# Check if Homebrew is installed
-if ! command -v brew >/dev/null 2>&1; then
-    echo "Homebrew not found. Installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-# Install brews
-echo "Installing Homebrew packages..."
-brew bundle --file=/dev/stdin <<EOF
-{{ range .packages.darwin.brews -}}
-brew {{ . | quote }}
-{{ end -}}
-EOF
-
-# Install casks
-echo "Installing Homebrew casks..."
-brew bundle --file=/dev/stdin <<EOF
-{{ range .packages.darwin.casks -}}
-cask {{ . | quote }}
-{{ end -}}
-EOF
-
-echo "=== Package installation complete ==="
-
-{{ else if eq .chezmoi.os "linux" -}}
-#!/usr/bin/env bash
-
-# Package installation for Linux
-# Uses Homebrew to install packages defined in .chezmoidata/packages.yaml
-
-set -e
-
-echo "=== Installing packages on Linux ==="
+echo "=== Installing packages on {{ .chezmoi.os }} ==="
 
 # Check if Homebrew is installed
 if ! command -v brew >/dev/null 2>&1; then
@@ -53,18 +19,66 @@ if ! command -v brew >/dev/null 2>&1; then
     exit 1
 fi
 
-# Install brews
-echo "Installing Homebrew packages..."
-brew bundle --file=/dev/stdin <<EOF
-{{ range .packages.linux.brews -}}
-brew {{ . | quote }}
+# Helper function to check if a package is already installed
+is_installed() {
+    local pkg="$1"
+    # Check if command exists in PATH (system-installed or other source)
+    if command -v "$pkg" >/dev/null 2>&1; then
+        return 0
+    fi
+    # Check if installed via Homebrew
+    if brew list "$pkg" >/dev/null 2>&1; then
+        return 0
+    fi
+    return 1
+}
+
+# Install a Homebrew formula if not already installed
+install_brew() {
+    local pkg="$1"
+    if ! is_installed "$pkg"; then
+        echo "Installing $pkg..."
+        brew install "$pkg"
+    else
+        echo "Skipping $pkg - already installed"
+    fi
+}
+
+# Install a Homebrew cask if not already installed
+install_cask() {
+    local cask="$1"
+    if ! brew list --cask "$cask" >/dev/null 2>&1; then
+        echo "Installing cask $cask..."
+        brew install --cask "$cask"
+    else
+        echo "Skipping cask $cask - already installed"
+    fi
+}
+
+# Install common packages
+echo "Installing common packages..."
+{{ range .packages.common.brews -}}
+install_brew {{ . | quote }}
 {{ end -}}
-EOF
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Install macOS-specific packages
+echo "Installing macOS-specific packages..."
+{{ range .packages.darwin.brews -}}
+install_brew {{ . | quote }}
+{{ end -}}
+
+# Install casks
+echo "Installing Homebrew casks..."
+{{ range .packages.darwin.casks -}}
+install_cask {{ . | quote }}
+{{ end -}}
+{{ else if eq .chezmoi.os "linux" -}}
+# Install Linux-specific packages
+echo "Installing Linux-specific packages..."
+{{ range .packages.linux.brews -}}
+install_brew {{ . | quote }}
+{{ end -}}
+{{ end -}}
 
 echo "=== Package installation complete ==="
-
-{{ else -}}
-#!/bin/sh
-echo "Unsupported OS: {{ .chezmoi.os }}"
-exit 1
-{{ end -}}

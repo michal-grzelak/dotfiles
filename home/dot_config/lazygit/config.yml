@@ -1,3 +1,5 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
 gui:
   showFileIcons: true
   nerdFontsVersion: "3"

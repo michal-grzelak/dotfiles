@@ -1,7 +1,7 @@
 packages:
-  darwin:
+  common:
     brews:
-      # Core tools
+      # Core tools - shared across macOS and Linux
       - neovim
       - tmux
       - fish
@@ -17,20 +17,10 @@ packages:
       - delta
       - difftastic
 
+  darwin:
+    casks:
+      # macOS-only GUI applications
+
   linux:
     brews:
-      # Core tools
-      - neovim
-      - tmux
-      - fish
-      - starship
-      - zoxide
-      - fzf
-      - eza
-      - bat
-      - ripgrep
-      - fd
-      - mise
-      - lazygit
-      - delta
-      - difftastic
+      # Linux-only packages (empty for now - uses common)

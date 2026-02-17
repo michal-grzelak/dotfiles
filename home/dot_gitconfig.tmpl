@@ -1,14 +1,11 @@
-# Managed by chezmoi - user additions go in ~/.gitconfig.local
-# User name and email are set via template variables
-{{- $isWsl := eq .chezmoi.kernel.osrelease ".*microsoft.*" -}}
-{{- $isLinux := eq .chezmoi.os "linux" -}}
-{{- $isLinuxNative := and $isLinux (not $isWsl) -}}
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# user additions go in ~/.gitconfig.local
 
 [core]
     editor = code -n --wait
     excludesFile = ~/.gitignore
     whitespace = -trailing-space
-{{- if $isWsl }}
+{{- if .isWsl }}
     sshCommand = ssh.exe
 {{- end }}
 
@@ -74,7 +71,7 @@
 [gpg]
     format = ssh
 
-{{- if $isLinuxNative }}
+{{- if .isLinuxNative }}
 
 [gpg "ssh"]
     program = /usr/bin/op-ssh-sign

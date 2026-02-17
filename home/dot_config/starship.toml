@@ -1,2 +1,4 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
 add_newline = true
 command_timeout = 2000
