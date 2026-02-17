@@ -1,0 +1,22 @@
+gui:
+  showFileIcons: true
+  nerdFontsVersion: "3"
+  screenMode: normal
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - default
+    searchingActiveBorderColor:
+      - cyan
+      - bold
+    optionsTextColor:
+      - blue
+
+git:
+  pagers:
+    - useExternalDiffGitConfig: true
+  disableForcePushing: false
+
+promptToReturnFromSubprocess: false

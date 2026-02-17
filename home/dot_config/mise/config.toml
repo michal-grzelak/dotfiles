@@ -1,0 +1,11 @@
+# Global tool versions
+[tools]
+node = "lts"
+python = "latest"
+go = "latest"
+rust = "stable"
+
+# Settings
+[settings]
+verbose = false
+yes = true

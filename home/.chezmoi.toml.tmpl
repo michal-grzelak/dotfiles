@@ -1,0 +1,33 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $name := promptStringOnce . "name" "Full name" -}}
+{{- $gitSigningKey := promptStringOnce . "gitSigningKey" "Git signing key (leave empty for no signing)" "" -}}
+
+encryption = "age"
+
+[data]
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
+
+    [data.git]
+        signingKey = {{ $gitSigningKey | quote }}
+
+[git]
+    autoPush = false
+    autoAdd = false
+    autoCommit = false
+
+[diff]
+    pager = "delta"
+
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
+
+# Hooks
+[hooks.apply.post]
+command = "echo"
+args = ["Dotfiles applied successfully!"]
+
+[hooks.init.post]
+command = "echo"
+args = ["Chezmoi initialized. Run 'chezmoi apply' to apply dotfiles."]

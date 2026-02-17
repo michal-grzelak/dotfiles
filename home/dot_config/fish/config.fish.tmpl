@@ -1,0 +1,95 @@
+{{- $isWsl := .chezmoi.kernel.osrelease | replaceAllRegex ".*[Mm]icrosoft.*" "wsl" | eq "wsl" -}}
+{{- $isLinux := eq .chezmoi.os "linux" -}}
+{{- $isLinuxNative := and $isLinux (not $isWsl) -}}
+
+# Disable greeting
+set -g fish_greeting ""
+
+# Editor settings
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx PAGER less
+
+# Path additions
+fish_add_path -g ~/.local/bin
+fish_add_path -g ~/.cargo/bin
+
+# XDG directories
+set -gx XDG_CONFIG_HOME ~/.config
+set -gx XDG_DATA_HOME ~/.local/share
+set -gx XDG_CACHE_HOME ~/.cache
+
+# Starship prompt
+if type -q starship
+    starship init fish | source
+end
+
+# Zoxide (smart cd)
+if type -q zoxide
+    zoxide init fish --cmd cd | source
+end
+
+# Direnv
+if type -q direnv
+    direnv hook fish | source
+end
+
+# FZF key bindings
+if type -q fzf
+    fzf --fish | source
+end
+
+{{- if eq .chezmoi.os "darwin" }}
+
+# macOS-specific settings
+set -gx HOMEBREW_NO_ANALYTICS 1
+set -gx HOMEBREW_NO_INSTALL_CLEANUP 1
+{{- else if eq .chezmoi.os "linux" }}
+
+# Linux-specific settings
+set -gx GPG_TTY (tty)
+
+{{-   if $isWsl }}
+
+# WSL-specific settings
+set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+set -gx LIBGL_ALWAYS_INDIRECT 1
+{{-   end }}
+{{- end }}
+
+{{- if eq .chezmoi.hostname "work-laptop" }}
+
+# Work-specific aliases and settings
+alias work='cd ~/projects/work'
+{{- end }}
+
+# Aliases
+alias ls='eza'
+alias ll='eza -l'
+alias la='eza -la'
+alias lt='eza --tree'
+alias cat='bat --paging=never'
+alias grep='rg'
+alias find='fd'
+alias vim='nvim'
+alias vi='nvim'
+alias cls='clear'
+
+# Git aliases
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+alias gd='git diff'
+alias gb='git branch'
+
+# Quick navigation
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Include local config if it exists
+if test -f ~/.config/fish/config.local.fish
+    source ~/.config/fish/config.local.fish
+end

@@ -1,0 +1,70 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+
+# Package installation for macOS
+# Uses Homebrew to install packages defined in .chezmoidata/packages.yaml
+
+set -e
+
+echo "=== Installing packages on macOS ==="
+
+# Check if Homebrew is installed
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install brews
+echo "Installing Homebrew packages..."
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
+
+# Install casks
+echo "Installing Homebrew casks..."
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+echo "=== Package installation complete ==="
+
+{{ else if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+# Package installation for Linux
+# Uses Homebrew to install packages defined in .chezmoidata/packages.yaml
+
+set -e
+
+echo "=== Installing packages on Linux ==="
+
+# Check if Homebrew is installed
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found."
+    echo ""
+    echo "Please install Homebrew first:"
+    echo "  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    echo ""
+    echo "After installation, add Homebrew to your PATH and run 'chezmoi apply' again."
+    exit 1
+fi
+
+# Install brews
+echo "Installing Homebrew packages..."
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.linux.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
+
+echo "=== Package installation complete ==="
+
+{{ else -}}
+#!/bin/sh
+echo "Unsupported OS: {{ .chezmoi.os }}"
+exit 1
+{{ end -}}

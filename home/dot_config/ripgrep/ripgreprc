@@ -1,0 +1,31 @@
+# Show line numbers
+--line-number
+
+# Show column numbers
+--column
+
+# Smart case search
+--smart-case
+
+# Follow symlinks
+--follow
+
+# Hidden files
+--hidden
+
+# Glob patterns to ignore
+--glob=!.git/*
+--glob=!.hg/*
+--glob=!.svn/*
+--glob=!node_modules/*
+--glob=!target/*
+--glob=!dist/*
+--glob=!*.lock
+
+# Colors
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=match:fg:red
+--colors=match:style:bold

@@ -1,0 +1,24 @@
+# Default git protocol
+git_protocol: ssh
+
+# Default editor
+editor: code
+
+# Default browser for web links
+browser: default
+
+# Prompt behavior
+prompt: enabled
+
+# Default host
+host: github.com
+
+# Aliases
+aliases:
+  co: pr checkout
+  pv: pr view
+  pc: pr create
+  prw: pr view --web
+  rv: repo view
+  rc: repo create
+  rw: repo view --web

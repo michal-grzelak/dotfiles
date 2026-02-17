@@ -1,0 +1,18 @@
+# Chezmoi state files (these live in ~/.local/share/chezmoi/)
+.chezmoistate.boltdb
+.chezmoistate.boltdb.tmp
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log

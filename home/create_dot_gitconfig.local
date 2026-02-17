@@ -1,0 +1,6 @@
+# User-specific git configuration
+# This file is not managed by chezmoi - add your personal git settings here
+# Example:
+# [user]
+#     name = Your Name
+#     email = your.email@example.com

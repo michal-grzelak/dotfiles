@@ -1,0 +1,16 @@
+# Files in this directory are ignored by chezmoi (not copied to target system)
+
+# AGENTS.md is repo-specific documentation
+AGENTS.md
+
+# GitHub files
+.github/
+
+# Editor configs (unless you want them managed)
+# .vscode/
+# .idea/
+
+# Temporary and cache files
+*.tmp
+*.log
+.cache/

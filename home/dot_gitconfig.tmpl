@@ -1,0 +1,136 @@
+# Managed by chezmoi - user additions go in ~/.gitconfig.local
+# User name and email are set via template variables
+{{- $isWsl := eq .chezmoi.kernel.osrelease ".*microsoft.*" -}}
+{{- $isLinux := eq .chezmoi.os "linux" -}}
+{{- $isLinuxNative := and $isLinux (not $isWsl) -}}
+
+[core]
+    editor = code -n --wait
+    excludesFile = ~/.gitignore
+    whitespace = -trailing-space
+{{- if $isWsl }}
+    sshCommand = ssh.exe
+{{- end }}
+
+[commit]
+    gpgSign = true
+
+[push]
+    default = simple
+    followTags = true
+
+[pull]
+    rebase = merges
+
+[merge]
+    tool = code
+    autoStash = true
+    conflictstyle = diff3
+
+[rebase]
+    autoStash = true
+
+[diff]
+    colorMoved = default
+
+[difftool]
+    prompt = false
+
+[difftool "code"]
+    cmd = code -n --wait --diff $LOCAL $REMOTE
+
+[pager]
+    difftool = false
+
+[mergetool]
+    trustExitCode = true
+    keepBackup = false
+
+[mergetool "code"]
+    cmd = code -n --wait --merge $LOCAL $REMOTE $BASE $MERGED
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[pack]
+    threads = 4
+
+[fetch]
+    prune = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[color]
+    ui = auto
+
+[init]
+    defaultBranch = main
+
+[gpg]
+    format = ssh
+
+{{- if $isLinuxNative }}
+
+[gpg "ssh"]
+    program = /usr/bin/op-ssh-sign
+{{- end }}
+
+# Aliases
+[alias]
+    # Keep original date after rebase
+    rebase-date = rebase --committer-date-is-author-date
+
+    # Commit
+    c = commit
+    cm = commit -m
+
+    # Prune non-existing branches
+    prune = fetch --prune --progress -v
+
+    # List unused branches
+    ubranch = branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname)%(end)'
+
+    # Git push without overwriting someone's changes
+    push-lease = push --force-with-lease
+
+    # Safer pulls; don't do anything other than a fast forward on merge
+    pull = pull --ff-only
+
+    # Remove file(s) from Git but not from disk
+    untrack = rm --cache --
+
+    # Continue rebase
+    crebase = rebase --continue
+
+    # Abort rebase
+    arebase = rebase --abort
+
+    # Continue merge
+    cmerge = merge --continue
+
+    # Checkout
+    co = checkout
+
+    # List tags with all messages
+    tags = tag -n99
+
+# Delta configuration
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    hyperlinks = true
+
+# Difftastic configuration
+[difftastic]
+    color = always
+
+# User additions from ~/.gitconfig.local
+{{- if fileExists (joinPath .chezmoi.homeDir ".gitconfig.local") }}
+{{ include (joinPath .chezmoi.homeDir ".gitconfig.local") }}
+{{- end }}
