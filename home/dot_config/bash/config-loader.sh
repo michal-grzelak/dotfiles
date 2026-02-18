@@ -3,7 +3,7 @@
 # Securely load all .sh files from conf.d and subdirectories in sorted order
 # Only source files owned by the current user for security
 
-_confd_dir="$HOME/.config/bash/conf.d"
+_confd_dir="./conf.d"
 _current_uid=$(id -u)
 
 if [[ -d "$_confd_dir" ]]; then
@@ -14,7 +14,7 @@ if [[ -d "$_confd_dir" ]]; then
         if [[ "$_file_owner" != "$_current_uid" ]]; then
             continue
         fi
-        
+
         source "$_conf_file"
     done < <(find "$_confd_dir" -type f -name '*.sh' -print0 | sort -z)
     unset _confd_dir _current_uid _conf_file _file_owner

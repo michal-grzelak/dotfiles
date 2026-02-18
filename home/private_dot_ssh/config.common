@@ -1,0 +1,5 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# user additions go in ~/.ssh/config.local
+
+Host *
+    AddKeysToAgent confirm

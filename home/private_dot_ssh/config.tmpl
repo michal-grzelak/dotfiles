@@ -1,11 +1,16 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
-# user additions go in ~/.ssh/config.local
 
-Host *
-{{- if .isLinuxNative }}
-    IdentityAgent ~/.1password/agent.sock
+{{ include "private_dot_ssh/config.common" }}
+
+{{- if eq .chezmoi.os "linux" }}
+
+{{ include "private_dot_ssh/config.linux" }}
 {{- end }}
-    AddKeysToAgent confirm
+
+{{- if eq .chezmoi.os "darwin" }}
+
+{{ include "private_dot_ssh/config.darwin" }}
+{{- end }}
 
 # User-specific SSH config
 {{- if fileExists (joinPath .chezmoi.homeDir ".ssh/config.local") }}

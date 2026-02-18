@@ -1,13 +1,9 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
-# user additions go in ~/.gitconfig
 
 [core]
     editor = code -n --wait
     excludesFile = ~/.gitignore
     whitespace = -trailing-space
-{{- if .isWsl }}
-    sshCommand = ssh.exe
-{{- end }}
 
 [commit]
     gpgSign = true
@@ -73,12 +69,6 @@
 
 [gpg]
     format = ssh
-
-{{- if .isLinuxNative }}
-
-[gpg "ssh"]
-    program = /usr/bin/op-ssh-sign
-{{- end }}
 
 # Aliases
 [alias]

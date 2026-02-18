@@ -1,0 +1,4 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+Host *
+    IdentityAgent ~/.1password/agent.sock

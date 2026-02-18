@@ -11,5 +11,5 @@ verbose = false
 yes = true
 
 [hooks]
-# automatically run mise i when entering a project with mise.toml
+# automatically run `mise i` when entering a project with mise.toml
 enter = "mise i -q"

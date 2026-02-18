@@ -1,0 +1,4 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+[gpg "ssh"]
+    program = /usr/bin/op-ssh-sign

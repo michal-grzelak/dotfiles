@@ -2,7 +2,7 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
 # Package installation script using brew bundle
-# .Brewfile hash: {{ include ".Brewfile" | sha256sum }}
+# .Brewfile hash: {{ includeTemplate "dot_Brewfile.tmpl" | sha256sum }}
 
 set -e
 
@@ -10,8 +10,7 @@ set -e
 if ! command -v brew >/dev/null 2>&1; then
     echo "Homebrew not found."
     echo ""
-    echo "Please install Homebrew first:"
-    echo "  /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    echo "Please install Homebrew first"
     echo ""
     echo "After installation, add Homebrew to your PATH and run 'chezmoi apply' again."
     exit 1
@@ -19,5 +18,5 @@ fi
 
 # Run brew bundle
 echo "=== Installing packages from Brewfile ==="
-brew bundle --file="$HOME/.Brewfile"
+brew bundle
 echo "=== Package installation complete ==="

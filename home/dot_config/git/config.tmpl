@@ -1,0 +1,22 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# user additions go in ~/.gitconfig
+
+{{ include "dot_config/git/config.common" }}
+
+{{- if .isWsl }}
+
+# WSL-specific settings
+[core]
+    sshCommand = ssh.exe
+# WSL-specific settings END
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+
+{{ include "dot_config/git/config.linux" }}
+{{- end }}
+
+{{- if eq .chezmoi.os "darwin" }}
+
+{{ include "dot_config/git/config.darwin" }}
+{{- end }}

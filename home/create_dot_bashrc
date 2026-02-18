@@ -1,0 +1,4 @@
+# User-specific bash configuration
+# This file is not managed by chezmoi - add your personal bash settings here
+# Example:
+# export PATH="$HOME/.local/bin:$PATH"
