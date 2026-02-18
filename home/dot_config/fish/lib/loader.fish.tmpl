@@ -1,0 +1,9 @@
+{{- /* MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit */ -}}
+
+# Load library files in order (explicit list - no wildcards)
+if test -f "$HOME/.config/fish/lib/env.fish"
+    source "$HOME/.config/fish/lib/env.fish"
+end
+if test -f "$HOME/.config/fish/lib/aliases.fish"
+    source "$HOME/.config/fish/lib/aliases.fish"
+end

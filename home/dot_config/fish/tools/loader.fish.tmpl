@@ -1,0 +1,24 @@
+{{- /* MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit */ -}}
+
+# Load tool configurations in order
+if test -f "$HOME/.config/fish/tools/brew.fish"
+    source "$HOME/.config/fish/tools/brew.fish"
+end
+if test -f "$HOME/.config/fish/tools/fd.fish"
+    source "$HOME/.config/fish/tools/fd.fish"
+end
+if test -f "$HOME/.config/fish/tools/fzf.fish"
+    source "$HOME/.config/fish/tools/fzf.fish"
+end
+if test -f "$HOME/.config/fish/tools/mise.fish"
+    source "$HOME/.config/fish/tools/mise.fish"
+end
+if test -f "$HOME/.config/fish/tools/ripgrep.fish"
+    source "$HOME/.config/fish/tools/ripgrep.fish"
+end
+if test -f "$HOME/.config/fish/tools/zoxide.fish"
+    source "$HOME/.config/fish/tools/zoxide.fish"
+end
+if test -f "$HOME/.config/fish/tools/lazygit.fish"
+    source "$HOME/.config/fish/tools/lazygit.fish"
+end

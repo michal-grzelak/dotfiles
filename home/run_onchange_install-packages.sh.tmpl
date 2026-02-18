@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-# Package installation script
-# Uses Homebrew to install packages defined in .chezmoidata/packages.yaml
+# Package installation script using brew bundle
+# .Brewfile hash: {{ include ".Brewfile" | sha256sum }}
 
 set -e
-
-echo "=== Installing packages on {{ .chezmoi.os }} ==="
 
 # Check if Homebrew is installed
 if ! command -v brew >/dev/null 2>&1; then
@@ -19,66 +17,7 @@ if ! command -v brew >/dev/null 2>&1; then
     exit 1
 fi
 
-# Helper function to check if a package is already installed
-is_installed() {
-    local pkg="$1"
-    # Check if command exists in PATH (system-installed or other source)
-    if command -v "$pkg" >/dev/null 2>&1; then
-        return 0
-    fi
-    # Check if installed via Homebrew
-    if brew list "$pkg" >/dev/null 2>&1; then
-        return 0
-    fi
-    return 1
-}
-
-# Install a Homebrew formula if not already installed
-install_brew() {
-    local pkg="$1"
-    if ! is_installed "$pkg"; then
-        echo "Installing $pkg..."
-        brew install "$pkg"
-    else
-        echo "Skipping $pkg - already installed"
-    fi
-}
-
-# Install a Homebrew cask if not already installed
-install_cask() {
-    local cask="$1"
-    if ! brew list --cask "$cask" >/dev/null 2>&1; then
-        echo "Installing cask $cask..."
-        brew install --cask "$cask"
-    else
-        echo "Skipping cask $cask - already installed"
-    fi
-}
-
-# Install common packages
-echo "Installing common packages..."
-{{ range .packages.common.brews -}}
-install_brew {{ . | quote }}
-{{ end -}}
-
-{{ if eq .chezmoi.os "darwin" -}}
-# Install macOS-specific packages
-echo "Installing macOS-specific packages..."
-{{ range .packages.darwin.brews -}}
-install_brew {{ . | quote }}
-{{ end -}}
-
-# Install casks
-echo "Installing Homebrew casks..."
-{{ range .packages.darwin.casks -}}
-install_cask {{ . | quote }}
-{{ end -}}
-{{ else if eq .chezmoi.os "linux" -}}
-# Install Linux-specific packages
-echo "Installing Linux-specific packages..."
-{{ range .packages.linux.brews -}}
-install_brew {{ . | quote }}
-{{ end -}}
-{{ end -}}
-
+# Run brew bundle
+echo "=== Installing packages from Brewfile ==="
+brew bundle --file="$HOME/.Brewfile"
 echo "=== Package installation complete ==="

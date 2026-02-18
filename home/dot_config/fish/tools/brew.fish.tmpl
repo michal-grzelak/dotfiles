@@ -1,0 +1,17 @@
+{{- /* MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit */ -}}
+
+# Homebrew shell integration
+if type -q brew
+    brew shellenv fish | source
+
+    set -gx HOMEBREW_NO_ANALYTICS 1
+    set -gx HOMEBREW_NO_INSTALL_CLEANUP 0
+    set -gx HOMEBREW_BUNDLE_FILE "$HOME/.Brewfile"
+
+    if test -d "$HOMEBREW_PREFIX/share/fish/completions"
+        set -p fish_complete_path "$HOMEBREW_PREFIX/share/fish/completions"
+    end
+    if test -d "$HOMEBREW_PREFIX/share/fish/vendor_completions.d"
+        set -p fish_complete_path "$HOMEBREW_PREFIX/share/fish/vendor_completions.d"
+    end
+end

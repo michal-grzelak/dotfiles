@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+# Mise install script - runs when mise config changes
+# Hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+set -e
+
+echo "=== Running mise install ==="
+
+# Check if mise is installed
+if ! command -v mise &> /dev/null; then
+    echo "mise not found. Skipping mise install."
+    exit 0
+fi
+
+# Run mise install to install tools defined in mise config
+mise i
+
+echo "=== Mise install complete ==="

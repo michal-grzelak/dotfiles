@@ -1,13 +1,15 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-# Global tool versions
 [tools]
 node = "lts"
 python = "latest"
 go = "latest"
 rust = "stable"
 
-# Settings
 [settings]
 verbose = false
 yes = true
+
+[hooks]
+# automatically run mise i when entering a project with mise.toml
+enter = "mise i -q"

@@ -16,7 +16,7 @@ Chezmoi maintains three states:
 
 - **Source state**: Declares the desired state of your **Destination directory**, through files and templates in `/home` in this repository
 - **Target state**: The desired state of **destination directory** computed from source state
-- **Destination directory**: Your actual home directory managed by chezmoi (`~`)
+- **Destination directory**: Your actual home directory managed by chezmoi (`~` or `$HOME`)
 - **Destination state**: The actual current state of destination directory
 
 The `chezmoi apply` command reconciles destination state with target state, making minimal necessary changes.
@@ -80,7 +80,7 @@ Scripts are files with the `run_` prefix. They execute during `chezmoi apply`.
 
 All scripts should be **idempotent** (safe to run multiple times).
 
-Create them preferably inside `.chezmoiscripts/`, so that they are not copied to target, unless they should specifically be in the target.
+Scripts SHOULD be created inside `.chezmoiscripts/`, so that they are not copied to destination directory, UNLESS they should specifically be in the destination directory.
 
 Scripts can be rerun (`run_onchange`) when content of another file changes, by using the pattern: `# dconf.ini hash: {{ include "dconf.ini" | sha256sum }}` (example) in the script. This way the script will only run when the hash changes, meaning the content of `dconf.ini` changed.
 
@@ -153,7 +153,8 @@ There are many more commands.
 1. **Keep secrets encrypted** - Never commit unencrypted secrets
 2. **Test with `chezmoi diff`** before applying changes
 3. **Correct shebang**: `#!/usr/bin/env bash` (not `/bin/bash`)
-4. Each file managed exclusively by chezmoi should have a header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it
+4. In shell scripts or code that will be executed directly on user machine, use `~` for user home directory instead of hardcoding paths, to ensure portability across machines. Differentiate when source paths (relative to source directory) and where destination paths (actual user paths) are needed.
+5. Each file managed exclusively by chezmoi should have a header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it
 
 ---
 
