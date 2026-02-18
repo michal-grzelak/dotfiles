@@ -1,0 +1,17 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+# Core tools
+brew "neovim"
+brew "tmux"
+brew "fish"
+brew "starship"
+brew "zoxide"
+brew "fzf"
+brew "eza"
+brew "bat"
+brew "ripgrep"
+brew "fd"
+brew "mise"
+brew "lazygit"
+brew "delta"
+brew "difftastic"

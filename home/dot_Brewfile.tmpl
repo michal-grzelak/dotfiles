@@ -1,0 +1,9 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+{{ include ".Brewfile.common" }}
+
+{{- if eq .chezmoi.os "darwin" }}
+{{ include ".Brewfile.darwin" }}
+{{- else if eq .chezmoi.os "linux" }}
+{{ include ".Brewfile.linux" }}
+{{- end }}

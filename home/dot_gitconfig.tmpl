@@ -1,5 +1,5 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
-# user additions go in ~/.gitconfig.local
+# user additions go in ~/.gitconfig
 
 [core]
     editor = code -n --wait
@@ -129,8 +129,3 @@
 # Difftastic configuration
 [difftastic]
     color = always
-
-# User additions from ~/.gitconfig.local
-{{- if fileExists (joinPath .chezmoi.homeDir ".gitconfig.local") }}
-{{ include (joinPath .chezmoi.homeDir ".gitconfig.local") }}
-{{- end }}

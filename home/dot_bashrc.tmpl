@@ -1,16 +1,4 @@
-{{- /* MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit */ -}}
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-# Source loader files (explicit list - no wildcards)
-[[ -r "$HOME/.config/bash/lib/loader.sh" ]]     && source "$HOME/.config/bash/lib/loader.sh"
-[[ -r "$HOME/.config/bash/tools/loader.sh" ]]   && source "$HOME/.config/bash/tools/loader.sh"
-[[ -r "$HOME/.config/bash/functions/loader.sh" ]] && source "$HOME/.config/bash/functions/loader.sh"
-
-# Starship prompt
-if command -v starship &> /dev/null; then
-    eval "$(starship init bash)"
-fi
-
-# Local overrides
-if [[ -f ~/.bashrc.local ]]; then
-    source ~/.bashrc.local
-fi
+# Source the secure auto-loader (sources all .sh files in conf.d with ownership check)
+[[ -r "$HOME/.config/bash/conf.d/00-loader.sh" ]] && source "$HOME/.config/bash/conf.d/00-loader.sh"

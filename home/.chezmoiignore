@@ -14,3 +14,11 @@ AGENTS.md
 *.tmp
 *.log
 .cache/
+
+# OS-specific split files (only used for inclusion via templates)
+**/*.common.*
+**/*.common
+**/*.linux.*
+**/*.linux
+**/*.darwin.*
+**/*.darwin

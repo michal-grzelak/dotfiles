@@ -1,0 +1,9 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+{{ include "dot_config/fish/conf.d/env.common.fish" }}
+
+{{- if eq .chezmoi.os "darwin" }}
+{{ include "dot_config/fish/conf.d/env.darwin.fish" }}
+{{- else if eq .chezmoi.os "linux" }}
+{{ include "dot_config/fish/conf.d/env.linux.fish" }}
+{{- end }}

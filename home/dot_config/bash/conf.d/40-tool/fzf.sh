@@ -1,0 +1,6 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+# FZF - Fuzzy finder
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --bash)"
+fi

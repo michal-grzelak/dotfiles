@@ -8,7 +8,7 @@ Below is presented only a fraction of key information.
 
 Chezmoi docs are the source of truth for every detail.
 
-When asked about a topic, enrich it with detailed information from documentation. Present the answer that will explain WHAT, WHY, WHEN and HOW.
+For any topic, DO NOT base your answer only on this file. ALWAYS when user asks about a topic, enrich the answer with detailed information from documentation. Information below is only a summary of key concepts. Every pattern MUST be checked in documentation. You MUST ALWAYS verify your knowledge and answer with documentation. BEFORE you make any change - analyze the documentation. Present the answer to user that will explain WHAT, WHY, WHEN and HOW.
 
 ## How Chezmoi Works
 
@@ -35,6 +35,12 @@ Chezmoi uses **attributes** (prefixes and suffixes) to control how files are han
 
 **Use `private_`** for sensitive files (SSH keys, credentials).
 
+Understand the difference between source and destination states to avoid confusion when managing files and templates. In the source state, files are defined with attributes and templates. The target state is what the destination directory should look like after applying changes. So e.g. `dot_gitconfig.tmpl` in source state will become `.gitconfig` in destination directory. E.g. when I want to create `.config/app/config.toml` file, then in the source state it should be `dot_config/app/config.toml`.
+
+When loading files inside files, you must remember that they will load files from destination state. This only concerns a scenario if files are loaded with tool or shell native capabilities. However, if you load files with `include` or `includeTemplate` function in a template, then they will be loaded from source state. This is an important distinction to understand when managing files and templates. This behavior can be changed by leveraging `.chezmoi.sourceDir` and `chezmoi.destDir` variables in templates and joining paths. Refer to docs for details.
+
+ALWAYS map the destination path to source path and vice versa by using documentation.
+
 ## Template System
 
 Chezmoi uses Go's `text/template` with Sprig functions.
@@ -47,6 +53,15 @@ Docs available at context7:
 Template files have `.tmpl` suffix.
 
 **Use templates** for dynamic content (email, name, machine-specific paths).
+
+WHENEVER possible, prefer the following pattern for templates:
+
+- `file.ext.tmpl` that imports `file.common.ext`, `file.linux.ext`, `file.darwin.ext` etc. with `include` function to combine them based on conditions
+- `file.ext.tmpl` can also have some parts that use templating features and are not possible to be exported to separate files, e.g. email and name parts in `.gitconfig` use templating variables
+- this way editor intellisense will work for every file
+- `.tmpl` suffix disables intellisense, so it's best to use it only for the main file that combines others, and keep the rest without `.tmpl` suffix
+- this pattern can be used with other templates as well, e.g. `file.ext.tmpl` can import `file.common.ext.tmpl` with `includeTemplate` and so on
+- ultimately, base files should be without `.tmpl` for easy editing with intellisense
 
 ### Built-in Variables
 
@@ -84,7 +99,11 @@ Scripts SHOULD be created inside `.chezmoiscripts/`, so that they are not copied
 
 Scripts can be rerun (`run_onchange`) when content of another file changes, by using the pattern: `# dconf.ini hash: {{ include "dconf.ini" | sha256sum }}` (example) in the script. This way the script will only run when the hash changes, meaning the content of `dconf.ini` changed.
 
+PREFER relative paths in the `include` function.
+
 Scripts can have different formats if **Interpreters** are set up.
+
+If you have logic in scripts, take into account that they usually will take into account state of destination directory, not source directory when using tools. So e.g. if script installs brew packages based on brewfile that is read from destination directory, then this script should be executed after the file is applied to destination directory. Analyze scripts and their dependencies carefully to ensure they run at the right time.
 
 ### External Resources
 
@@ -112,16 +131,15 @@ Chezmoi integrates with apps like 1Password for sensitive data retrieval.
 
 ### Daily Operations
 
-| Command                   | Purpose                         |
-| ------------------------- | ------------------------------- |
-| `chezmoi cd`              | Navigate to source directory    |
-| `chezmoi diff`            | Preview changes before applying |
-| `chezmoi apply`           | Apply changes to destination    |
-| `chezmoi apply ~/.bashrc` | Apply single file               |
-| `chezmoi add ~/.bashrc`   | Add file to source state        |
-| `chezmoi edit ~/.bashrc`  | Edit source and re-apply        |
-| `chezmoi status`          | Show status of managed files    |
-| `chezmoi doctor`          | Check installation health       |
+| Command                   | Purpose                          |
+| ------------------------- | -------------------------------- |
+| `chezmoi cd`              | Navigate to source directory     |
+| `chezmoi diff`            | Preview changes before applying  |
+| `chezmoi apply`           | Apply changes to destination     |
+| `chezmoi apply --dry-run` | Preview changes without applying |
+| `chezmoi edit ~/.bashrc`  | Edit source and re-apply         |
+| `chezmoi status`          | Show status of managed files     |
+| `chezmoi doctor`          | Check installation health        |
 
 There are many more commands.
 
@@ -146,17 +164,13 @@ There are many more commands.
 | `chezmoi cat ~/.bashrc`                         | View source content                          |
 | `chezmoi source-path ~/.bashrc`                 | Get source path for target                   |
 
----
-
 ## Best Practices
 
 1. **Keep secrets encrypted** - Never commit unencrypted secrets
 2. **Test with `chezmoi diff`** before applying changes
 3. **Correct shebang**: `#!/usr/bin/env bash` (not `/bin/bash`)
 4. In shell scripts or code that will be executed directly on user machine, use `~` for user home directory instead of hardcoding paths, to ensure portability across machines. Differentiate when source paths (relative to source directory) and where destination paths (actual user paths) are needed.
-5. Each file managed exclusively by chezmoi should have a header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it
-
----
+5. Each file managed exclusively by chezmoi should have a comment header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it. Comment should use the same syntax as the file type, e.g. `#` for shell scripts, even if this is a `.tmpl` file.
 
 ## Documentation Reference
 
