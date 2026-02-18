@@ -21,6 +21,10 @@ Chezmoi maintains three states:
 
 The `chezmoi apply` command reconciles destination state with target state, making minimal necessary changes.
 
+Repository root and chezmoi root directories are different things. Chezmoi root can be set via `.chezmoiroot` file. In this repository this is `<repository_root>/home` directory. By default, it's the repository root. Chezmoi root represents the **Source state**.
+
+Nesting chezmoi root allows you to have files in the repository that are not part of the source state.
+
 ## File Naming Conventions
 
 Chezmoi uses **attributes** (prefixes and suffixes) to control how files are handled. See docs for all of them. Multiple prefixes can be combined (order matters).
@@ -158,5 +162,9 @@ There are many more commands.
 For authoritative details and examples, query Context7 `/websites/chezmoi_io`.
 
 Chezmoi docs are the source of truth. Use Context7 when implementing specific features.
+
+When in doubt, refer to the official documentation or ask for clarification.
+
+DO NOT base your answer only on this file. ALWAYS when user asks about a topic, enrich the answer with detailed information from documentation. Present the answer that will explain WHAT, WHY, WHEN and HOW.
 
 Under no circumstances query `/twpayne/chezmoi`.
