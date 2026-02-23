@@ -13,6 +13,6 @@
 {{- end }}
 
 # User-specific SSH config
-{{- if fileExists (joinPath .chezmoi.homeDir ".ssh/config.local") }}
+{{- if stat (joinPath .chezmoi.homeDir ".ssh/config.local") }}
 {{ include (joinPath .chezmoi.homeDir ".ssh/config.local") }}
 {{- end }}
