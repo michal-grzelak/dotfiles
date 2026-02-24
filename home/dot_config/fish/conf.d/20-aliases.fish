@@ -1,8 +1,6 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
 # Core aliases
-alias cls='clear'
-
-# Quick navigation
-alias ...='cd ../..'
-alias ....='cd ../../..'
+alias cls clear
+alias ... "cd ../.."
+alias .... "cd ../../.."

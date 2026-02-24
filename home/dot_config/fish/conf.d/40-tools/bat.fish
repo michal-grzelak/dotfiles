@@ -4,4 +4,4 @@
 set -gx BAT_CONFIG_PATH $XDG_CONFIG_HOME/bat/config.conf
 
 # Bat alias (cat replacement)
-alias cat='bat --paging=never'
+alias cat "bat --paging=never"
