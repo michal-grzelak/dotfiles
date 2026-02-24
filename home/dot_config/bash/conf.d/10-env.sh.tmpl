@@ -1,9 +1,9 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-{{ include "dot_config/bash/conf.d/env.common.sh" }}
+{{ include "dot_config/bash/conf.d/10-env.common.sh" }}
 
 {{- if eq .chezmoi.os "darwin" }}
-{{ include "dot_config/bash/conf.d/env.darwin.sh" }}
+{{ include "dot_config/bash/conf.d/10-env.darwin.sh" }}
 {{- else if eq .chezmoi.os "linux" }}
-{{ include "dot_config/bash/conf.d/env.linux.sh" }}
+{{ include "dot_config/bash/conf.d/10-env.linux.sh" }}
 {{- end }}
