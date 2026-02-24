@@ -62,6 +62,7 @@ WHENEVER possible, prefer the following pattern for templates:
 - `.tmpl` suffix disables intellisense, so it's best to use it only for the main file that combines others, and keep the rest without `.tmpl` suffix
 - this pattern can be used with other templates as well, e.g. `file.ext.tmpl` can import `file.common.ext.tmpl` with `includeTemplate` and so on
 - ultimately, base files should be without `.tmpl` for easy editing with intellisense
+- files that are included in templates (`*.linux.ext`, `*.darwin.ext` etc.) should not contain `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit` comment, because they are not managed by chezmoi directly, but rather imported into other files that are managed by chezmoi
 
 ### Built-in Variables
 
@@ -119,6 +120,8 @@ Configure to run commands at lifecycle points.
 
 Create `.chezmoiignore.tmpl` to exclude files from management.
 
+Files that are included in templates (e.g. `file.linux.ext` included in `file.ext.tmpl`) are ignored, to no duplicate content in destination directory. They are not managed by chezmoi directly, but rather imported into other files that are managed by chezmoi.
+
 ## Security & Secrets
 
 ### Encryption
@@ -170,7 +173,7 @@ There are many more commands.
 2. **Test with `chezmoi diff`** before applying changes
 3. **Correct shebang**: `#!/usr/bin/env bash` (not `/bin/bash`)
 4. In shell scripts or code that will be executed directly on user machine, use `~` for user home directory instead of hardcoding paths, to ensure portability across machines. Differentiate when source paths (relative to source directory) and where destination paths (actual user paths) are needed.
-5. Each file managed exclusively by chezmoi should have a comment header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it. Comment should use the same syntax as the file type, e.g. `#` for shell scripts, even if this is a `.tmpl` file.
+5. Each file managed exclusively by chezmoi should have a comment header `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit`. Not every file might need it. Comment should use the same syntax as the file type, e.g. `#` for shell scripts, even if this is a `.tmpl` file, because template files are rendered to destination directory with respective extension.
 
 ## Documentation Reference
 

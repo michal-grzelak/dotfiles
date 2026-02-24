@@ -6,15 +6,14 @@
 
 set -e
 
-echo "=== Running mise install ==="
 
 # Check if mise is installed
 if ! command -v mise &> /dev/null; then
     echo "mise not found. Skipping mise install."
-    exit 0
+    exit 1
 fi
 
 # Run mise install to install tools defined in mise config
+echo "=== Running mise install ==="
 mise i
-
 echo "=== Mise install complete ==="
