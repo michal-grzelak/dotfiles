@@ -1,4 +1,4 @@
-# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# Common configuration
 
 # Only run for interactive shells
 [[ $- != *i* ]] && return

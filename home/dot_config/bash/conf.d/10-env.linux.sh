@@ -1,4 +1,3 @@
-# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# Linux configuration
 
-# Linux-specific settings
 export GPG_TTY=$(tty)

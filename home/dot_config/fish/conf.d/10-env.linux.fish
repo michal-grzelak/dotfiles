@@ -1,4 +1,3 @@
-# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# Linux configuration
 
-# Linux-specific settings
 set -gx GPG_TTY (tty)

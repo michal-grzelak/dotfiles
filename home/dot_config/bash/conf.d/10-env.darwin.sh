@@ -1,3 +1,1 @@
-# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
-
-# macOS-specific settings
+# macOS configuration

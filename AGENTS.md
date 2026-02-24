@@ -62,7 +62,7 @@ WHENEVER possible, prefer the following pattern for templates:
 - `.tmpl` suffix disables intellisense, so it's best to use it only for the main file that combines others, and keep the rest without `.tmpl` suffix
 - this pattern can be used with other templates as well, e.g. `file.ext.tmpl` can import `file.common.ext.tmpl` with `includeTemplate` and so on
 - ultimately, base files should be without `.tmpl` for easy editing with intellisense
-- files that are included in templates (`*.linux.ext`, `*.darwin.ext` etc.) should not contain `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit` comment, because they are not managed by chezmoi directly, but rather imported into other files that are managed by chezmoi
+- files that are included in templates (`*.linux.ext`, `*.darwin.ext` etc.) should not contain `MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit` comment, because they are not managed by chezmoi directly, but rather imported into other files that are managed by chezmoi. Instead they should have a comment like `Linux/darwin/else configuration`.
 
 ### Built-in Variables
 

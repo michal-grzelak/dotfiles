@@ -1,4 +1,4 @@
-# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+# Common configuration
 
 # Disable greeting
 set -g fish_greeting ""
