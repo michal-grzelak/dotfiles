@@ -4,6 +4,10 @@
 if command -v brew &> /dev/null; then
     eval "$(brew shellenv bash)"
 
+    export HOMEBREW_NO_ANALYTICS=1
+    export HOMEBREW_NO_INSTALL_CLEANUP=0
+    export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
+
     if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
         source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     else
@@ -12,7 +16,5 @@ if command -v brew &> /dev/null; then
         done
     fi
 
-    export HOMEBREW_NO_ANALYTICS=1
-    export HOMEBREW_NO_INSTALL_CLEANUP=0
-    export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
+
 fi

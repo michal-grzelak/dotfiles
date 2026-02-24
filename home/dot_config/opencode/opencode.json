@@ -1,0 +1,41 @@
+// MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "nano-gpt": {
+      "models": {
+        "moonshotai/kimi-k2.5": {
+          "limit": {
+            "context": 256000,
+            "output": 65535
+          },
+          "name": "Kimi K2.5"
+        },
+        "moonshotai/kimi-k2.5:thinking": {
+          "limit": {
+            "context": 256000,
+            "output": 65535
+          },
+          "name": "Kimi K2.5 Thinking"
+        }
+      },
+      "options": {
+        "timeout": 600000
+      }
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  },
+  "mode": {
+    "plan": {
+      "model": "deepseek/deepseek-reasoner"
+    },
+    "build": {
+      "model": "opencode/minimax-m2.5-free"
+    }
+  }
+}
