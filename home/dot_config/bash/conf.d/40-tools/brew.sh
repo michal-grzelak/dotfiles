@@ -1,8 +1,16 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
 # Homebrew shell integration
-if command -v brew &> /dev/null; then
-    eval "$(brew shellenv bash)"
+brew_path=""
+for path in /home/linuxbrew/.linuxbrew/bin/brew ~/.linuxbrew/bin/brew /usr/local/bin/brew /opt/homebrew/bin/brew; do
+    if [[ -x "$path" ]]; then
+        brew_path="$path"
+        break
+    fi
+done
+
+if [[ -n "$brew_path" ]]; then
+    eval "$($brew_path shellenv bash)"
 
     export HOMEBREW_NO_ANALYTICS=1
     export HOMEBREW_NO_INSTALL_CLEANUP=0
@@ -15,6 +23,4 @@ if command -v brew &> /dev/null; then
             [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
         done
     fi
-
-
 fi

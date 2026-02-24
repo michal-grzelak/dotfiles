@@ -1,8 +1,16 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
 # Homebrew shell integration
-if type -q brew
-    brew shellenv fish | source
+set -l brew_path ""
+for path in /home/linuxbrew/.linuxbrew/bin/brew ~/.linuxbrew/bin/brew /usr/local/bin/brew /opt/homebrew/bin/brew
+    if test -x "$path"
+        set brew_path $path
+        break
+    end
+end
+
+if test -n "$brew_path"
+    $brew_path shellenv fish | source
 
     set -gx HOMEBREW_NO_ANALYTICS 1
     set -gx HOMEBREW_NO_INSTALL_CLEANUP 0
