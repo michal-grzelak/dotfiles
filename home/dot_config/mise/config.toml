@@ -9,6 +9,7 @@ rust = "stable"
 [settings]
 verbose = false
 yes = true
+experimental = true
 
 [hooks]
 # automatically run `mise i` when entering a project with mise.toml
