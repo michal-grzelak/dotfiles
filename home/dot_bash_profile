@@ -1,7 +1,4 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-# Source base config loader
-[[ -r "$HOME/.config/bash/config-loader.sh" ]] && source "$HOME/.config/bash/config-loader.sh"
-
 # Source ~/.bashrc if it exists for interactive login shells
 [[ -r "$HOME/.bashrc" ]] && source "$HOME/.bashrc"

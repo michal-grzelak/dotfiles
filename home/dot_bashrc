@@ -1,0 +1,7 @@
+# MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
+
+# Source base config loader
+[[ -r "$HOME/.config/bash/config-loader.sh" ]] && source "$HOME/.config/bash/config-loader.sh"
+
+# Source user overrides
+[[ -r "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
