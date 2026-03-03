@@ -13,6 +13,4 @@
 {{- end }}
 
 # User-specific SSH config
-{{- if stat (joinPath .chezmoi.homeDir ".ssh/config.local") }}
-{{ include (joinPath .chezmoi.homeDir ".ssh/config.local") }}
-{{- end }}
+Include ~/.ssh/config.local

@@ -1,6 +1,11 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 # user additions go in ~/.gitconfig
 
+[user]
+    name = {{ .name | quote }}
+    email = {{ .email | quote }}
+    signingKey = {{ .git.signingKey | quote }}
+
 {{ include "dot_config/git/config.common" }}
 
 {{- if .isWsl }}

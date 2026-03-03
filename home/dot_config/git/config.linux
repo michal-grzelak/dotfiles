@@ -1,4 +1,4 @@
 # Linux configuration
 
 [gpg "ssh"]
-    program = /usr/bin/op-ssh-sign
+    program = /opt/1Password/op-ssh-sign
