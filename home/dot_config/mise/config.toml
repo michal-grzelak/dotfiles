@@ -1,7 +1,7 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
 [tools]
-node = "lts"
+node = "latest"
 python = "latest"
 go = "latest"
 rust = "stable"
@@ -10,6 +10,7 @@ rust = "stable"
 verbose = false
 yes = true
 experimental = true
+disable_backends = ["asdf"]
 
 [hooks]
 # automatically run `mise i` when entering a project with mise.toml
