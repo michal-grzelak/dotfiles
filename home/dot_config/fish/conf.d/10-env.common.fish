@@ -12,3 +12,6 @@ set -gx PAGER delta
 set -gx XDG_CONFIG_HOME ~/.config
 set -gx XDG_DATA_HOME ~/.local/share
 set -gx XDG_CACHE_HOME ~/.cache
+
+# mise override
+set -gx MISE_FISH_AUTO_ACTIVATE 0
