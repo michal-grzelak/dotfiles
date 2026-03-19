@@ -8,4 +8,5 @@ ignore:
   - "**/.DS_Store"
   - "**/.git/**"
 audit:
-  block_threshold: CRITICAL
+  block_threshold: HIGH
+  profile: strict
