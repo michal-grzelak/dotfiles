@@ -1,0 +1,35 @@
+{
+  "listen": "127.0.0.1:8080",
+  "api_key": "b2a0f71fcd9968400a82c59106c757683a54d8816c78a4c0f3c28d28ed09ad8c",
+  "data_dir": "~/.mcpproxy",
+  "enable_socket": true,
+  "tools_limit": 15,
+  "tool_response_limit": 20000,
+  "enable_code_execution": true,
+  "code_execution_timeout_ms": 120000,
+  "code_execution_max_tool_calls": 0,
+  "code_execution_pool_size": 10,
+  "features": {
+    "enable_web_ui": true
+  },
+  "mcpServers": [
+    {
+      "name": "context7",
+      "protocol": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    {
+      "name": "chrome-dev-tools",
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--headless",
+        "--no-usage-statistics"
+      ],
+      "protocol": "stdio",
+      "enabled": false
+    }
+  ]
+}

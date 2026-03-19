@@ -5,6 +5,7 @@ node = "latest"
 python = "latest"
 go = "latest"
 rust = "stable"
+uv = "latest"
 
 [settings]
 verbose = false

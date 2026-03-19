@@ -2,6 +2,6 @@
 
 # Eza aliases (ls replacement)
 alias ls eza
-alias ll "eza -l"
-alias la "eza -la"
-alias lt "eza --tree"
+alias ll "ls -l"
+alias la "ls -la"
+alias lt "ls --tree"

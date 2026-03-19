@@ -3,9 +3,9 @@
   "$schema": "https://opencode.ai/config.json",
   "provider": {},
   "mcp": {
-    "context7": {
+    "tool_search": {
       "type": "remote",
-      "url": "https://mcp.context7.com/mcp"
+      "url": "http://127.0.0.1:25648/mcp"
     }
   },
   "mode": {
