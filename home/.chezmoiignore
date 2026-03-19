@@ -22,3 +22,6 @@ AGENTS.md
 **/*.linux
 **/*.darwin.*
 **/*.darwin
+
+# Skillshare (uses symlink)
+.config/skillshare/configuration.yaml

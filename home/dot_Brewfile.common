@@ -1,7 +1,6 @@
 # Common configuration
 
-# Core tools
-brew "neovim"
+# Core terminal tools
 brew "tmux"
 brew "fish"
 brew "starship"
@@ -12,8 +11,16 @@ brew "bat"
 brew "ripgrep"
 brew "fd"
 brew "mise"
-brew "lazygit"
 brew "git-delta"
 brew "difftastic"
-brew "opencode"
+
+# Editor
+brew "neovim"
+
+# TUI
+brew "lazygit"
 brew "Valkyrie00/homebrew-bbrew/bbrew"
+
+# AI
+brew "opencode"
+brew "skillshare"
