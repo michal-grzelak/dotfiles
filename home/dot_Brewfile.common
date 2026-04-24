@@ -25,3 +25,6 @@ brew "Valkyrie00/homebrew-bbrew/bbrew"
 brew "opencode"
 brew "skillshare"
 brew "smart-mcp-proxy/mcpproxy/mcpproxy"
+
+# Download
+brew "yt-dlp"
