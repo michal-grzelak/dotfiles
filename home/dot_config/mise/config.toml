@@ -6,6 +6,7 @@ python = "latest"
 go = "latest"
 rust = "stable"
 uv = "latest"
+bun = "latest"
 
 [settings]
 verbose = false

@@ -3,8 +3,6 @@
 # Zoxide - Smarter cd command
 if status is-interactive
     if type -q zoxide
-        zoxide init fish | source
-
-        alias cd z
+        zoxide init fish --cmd cd | source
     end
 end
