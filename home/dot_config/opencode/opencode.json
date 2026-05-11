@@ -5,13 +5,10 @@
   "mcp": {
     "tool_search": {
       "type": "remote",
-      "url": "http://127.0.0.1:25648/mcp"
+      "url": "http://127.0.0.1:8080/mcp?apikey=b2a0f71fcd9968400a82c59106c757683a54d8816c78a4c0f3c28d28ed09ad8c"
     }
   },
   "mode": {
-    "plan": {
-      "model": "deepseek/deepseek-reasoner"
-    },
     "build": {
       "model": "opencode/minimax-m2.5-free"
     }

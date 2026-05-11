@@ -4,7 +4,8 @@ mode: merge
 target_naming: standard
 targets:
   universal:
-    path: ~/.agents/skills
+    skills:
+      path: ~/.agents/skills
 ignore:
   - "**/.DS_Store"
   - "**/.git/**"

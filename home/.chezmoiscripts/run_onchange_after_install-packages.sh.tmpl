@@ -17,6 +17,11 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 # Run brew bundle
+if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
+    echo "=== Sourcing .bashrc (new installation) ==="
+    source "$HOME/.bashrc"
+fi
+
 echo "=== Installing packages from Brewfile ==="
 brew bundle
 echo "=== Package installation complete ==="
