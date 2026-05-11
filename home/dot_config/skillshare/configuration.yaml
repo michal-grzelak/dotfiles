@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/config.schema.json
 source: ~/.local/share/chezmoi/home/dot_config/skillshare/skills
 mode: merge
+target_naming: standard
 targets:
   universal:
     path: ~/.agents/skills
