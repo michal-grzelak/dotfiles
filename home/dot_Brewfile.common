@@ -25,6 +25,8 @@ brew "Valkyrie00/homebrew-bbrew/bbrew"
 brew "opencode"
 brew "skillshare"
 brew "smart-mcp-proxy/mcpproxy/mcpproxy"
+brew "AlexsJones/llmfit/llmfit"
+brew "ramalama"
 
 # Download
 brew "yt-dlp"

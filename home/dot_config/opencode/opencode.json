@@ -1,16 +1,47 @@
 // MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {},
-  "mcp": {
-    "tool_search": {
-      "type": "remote",
-      "url": "http://127.0.0.1:8080/mcp?apikey=b2a0f71fcd9968400a82c59106c757683a54d8816c78a4c0f3c28d28ed09ad8c"
+  "provider": {
+    "lm-studio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "lm-studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1",
+        "apiKey": "he9gjrvm9werp9349e08a3werpo0i34089jgreio"
+      },
+      "models": {
+        "qwen3.6": {
+          "limit": {
+            "context": 128000,
+            "output": 8000,
+            "input": 120000
+          }
+        }
+      }
     }
   },
-  "mode": {
-    "build": {
-      "model": "opencode/minimax-m2.5-free"
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
+  "mcp": {
+    // "tool_search": {
+    //   "type": "remote",
+    //   "url": "http://127.0.0.1:8080/mcp?apikey=b2a0f71fcd9968400a82c59106c757683a54d8816c78a4c0f3c28d28ed09ad8c"
+    // }
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      // "headers": {
+      //   "CONTEXT7_API_KEY": "YOUR_API_KEY"
+      // },
+      "enabled": true
     }
-  }
+  },
+  "permission": {
+    "context7*": "allow"
+  },
+  "agent": {
+    "build": {
+      "model": "lm-studio/qwen3.6"
+    }
+  },
+  "formatter": {}
 }
