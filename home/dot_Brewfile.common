@@ -19,13 +19,12 @@ brew "neovim"
 
 # TUI
 brew "lazygit"
-brew "Valkyrie00/homebrew-bbrew/bbrew"
+brew "Valkyrie00/homebrew-bbrew/bbrew", trusted: true
 
 # AI
 brew "opencode"
 brew "skillshare"
-brew "smart-mcp-proxy/mcpproxy/mcpproxy"
-brew "AlexsJones/llmfit/llmfit"
+brew "AlexsJones/llmfit/llmfit", trusted: true
 brew "ramalama"
 
 # Download
