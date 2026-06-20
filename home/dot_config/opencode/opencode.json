@@ -20,7 +20,16 @@
       }
     }
   },
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    [
+      "@plannotator/opencode@latest",
+      {
+        "workflow": "plan-agent",
+        "planningAgents": ["plan"]
+      }
+    ]
+  ],
   "mcp": {
     // "tool_search": {
     //   "type": "remote",
@@ -33,12 +42,37 @@
       //   "CONTEXT7_API_KEY": "YOUR_API_KEY"
       // },
       "enabled": true
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
     }
   },
   "permission": {
-    "context7*": "allow"
+    "context7*": "allow",
+    "sequential-thinking*": "deny"
   },
   "agent": {
+    "plan": {
+      "permission": {
+        "sequential-thinking*": "allow"
+      }
+    },
+    "explore": {
+      "permission": {
+        "sequential-thinking*": "allow"
+      }
+    },
+    "general": {
+      "permission": {
+        "sequential-thinking*": "allow"
+      }
+    },
     "build": {
       "model": "lm-studio/qwen3.6"
     }
