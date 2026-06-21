@@ -1,14 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/config.schema.json
-source: /home/mgrzelak/.local/share/chezmoi/home/dot_config/skillshare/skills
+source: ~/.local/share/chezmoi/home/dot_config/skillshare/skills
 mode: merge
 target_naming: standard
 targets:
   claude:
     skills:
-      path: /home/mgrzelak/.claude/skills
+      path: ~/.claude/skills
   opencode:
     skills:
-      path: /home/mgrzelak/.config/opencode/skills
+      path: ~/.config/opencode/skills
 ignore:
   - "**/.DS_Store"
   - "**/.git/**"

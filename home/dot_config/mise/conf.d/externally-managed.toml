@@ -16,4 +16,4 @@ disable_backends = ["asdf"]
 
 [hooks]
 # automatically run `mise i` when entering a project with mise.toml
-enter = "mise i -q"
+# enter = "mise i -q"
