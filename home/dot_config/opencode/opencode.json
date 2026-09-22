@@ -1,6 +1,9 @@
 // MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 {
   "$schema": "https://opencode.ai/config.json",
+  "shell": "fish",
+  "lsp": {},
+  "formatter": {},
   "provider": {
     "lm-studio": {
       "npm": "@ai-sdk/openai-compatible",
@@ -47,28 +50,39 @@
     }
   },
   "permission": {
-    "context7*": "allow",
-    "sequential-thinking*": "deny"
+    "skill": {
+      "*": "deny",
+
+      "customize-opencode": "allow",
+      "context7-mcp": "allow",
+
+      // ! when superpowers adds a skill, add it to this list
+      "brainstorming": "allow",
+      "dispatching-parallel-agents": "allow",
+      "executing-plans": "allow",
+      "finishing-a-development-branch": "allow",
+      "receiving-code-review": "allow",
+      "requesting-code-review": "allow",
+      "subagent-driven-development": "allow",
+      "systematic-debugging": "allow",
+      "test-driven-development": "allow",
+      "using-git-worktrees": "allow",
+      "using-superpowers": "allow",
+      "verification-before-completion": "allow",
+      "writing-plans": "allow",
+      "writing-skills": "allow"
+    }
   },
   "agent": {
     "plan": {
-      "permission": {
-        "sequential-thinking*": "allow"
-      }
+      "permission": {}
     },
     "explore": {
-      "permission": {
-        "sequential-thinking*": "allow"
-      }
+      "permission": {}
     },
     "general": {
-      "permission": {
-        "sequential-thinking*": "allow"
-      }
+      "permission": {}
     },
-    "build": {
-      "model": "lm-studio/qwen3.6"
-    }
-  },
-  "formatter": {}
+    "build": {}
+  }
 }
