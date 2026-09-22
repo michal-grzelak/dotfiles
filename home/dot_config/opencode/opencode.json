@@ -31,16 +31,9 @@
     ]
   ],
   "mcp": {
-    // "tool_search": {
-    //   "type": "remote",
-    //   "url": "http://127.0.0.1:8080/mcp?apikey=b2a0f71fcd9968400a82c59106c757683a54d8816c78a4c0f3c28d28ed09ad8c"
-    // }
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
-      // "headers": {
-      //   "CONTEXT7_API_KEY": "YOUR_API_KEY"
-      // },
       "enabled": true
     },
     "sequential-thinking": {
