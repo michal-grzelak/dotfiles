@@ -7,12 +7,16 @@ go = "latest"
 rust = "latest"
 uv = "latest"
 bun = "latest"
+aube = "latest"
+
+"npm:@agentmemory/agentmemory" = { version = "latest" }
 
 [settings]
 verbose = false
 yes = true
 experimental = true
 disable_backends = ["asdf"]
+npm = { package_manager = "aube" }
 
 [hooks]
 # automatically run `mise i` when entering a project with mise.toml
