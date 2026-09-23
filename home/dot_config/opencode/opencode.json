@@ -25,6 +25,7 @@
   },
   "plugin": [
     "superpowers@git+https://github.com/obra/superpowers.git",
+    "@upstash/context7-opencode",
     [
       "@plannotator/opencode@latest",
       {
