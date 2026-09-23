@@ -7,8 +7,8 @@ targets:
     skills:
       path: /var/home/mgrzelak/.claude/skills
 ignore:
-  - '**/.DS_Store'
-  - '**/.git/**'
+  - "**/.DS_Store"
+  - "**/.git/**"
 audit:
   block_threshold: HIGH
   profile: strict
