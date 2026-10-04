@@ -8,8 +8,7 @@ rust = "latest"
 uv = "latest"
 bun = "latest"
 aube = "latest"
-
-"npm:@agentmemory/agentmemory" = { version = "latest" }
+fnox = "latest"
 
 [settings]
 verbose = false

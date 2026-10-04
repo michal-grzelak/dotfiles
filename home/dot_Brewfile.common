@@ -22,7 +22,7 @@ brew "lazygit"
 brew "Valkyrie00/homebrew-bbrew/bbrew", trusted: true
 
 # AI
-brew "opencode"
+brew "anomalyco/tap/opencode-v2", trusted: true
 brew "skillshare"
 brew "AlexsJones/llmfit/llmfit", trusted: true
 brew "ramalama"
