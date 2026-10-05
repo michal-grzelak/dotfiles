@@ -16,6 +16,7 @@ brew "difftastic"
 
 # Editor
 brew "neovim"
+cask "zed"
 
 # TUI
 brew "lazygit"
