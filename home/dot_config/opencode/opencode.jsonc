@@ -4,11 +4,11 @@
   "shell": "fish",
   "lsp": {},
   "formatter": {},
-  "provider": {
+  "providers": {
     "lm-studio": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "lm-studio",
-      "options": {
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
         "baseURL": "http://localhost:1234/v1",
         "apiKey": "he9gjrvm9werp9349e08a3werpo0i34089jgreio"
       },
@@ -37,52 +37,52 @@
     }
   ],
   "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true
-    },
-    "sequential-thinking": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "enabled": true
-    },
-  },
-  "permission": {
-    "skill": {
-      "*": "deny",
-      "customize-opencode": "allow",
-      "context7-mcp": "allow",
-      // ! when superpowers adds a skill, add it to this list
-      "brainstorming": "allow",
-      "dispatching-parallel-agents": "allow",
-      "executing-plans": "allow",
-      "finishing-a-development-branch": "allow",
-      "receiving-code-review": "allow",
-      "requesting-code-review": "allow",
-      "subagent-driven-development": "allow",
-      "systematic-debugging": "allow",
-      "test-driven-development": "allow",
-      "using-git-worktrees": "allow",
-      "using-superpowers": "allow",
-      "verification-before-completion": "allow",
-      "writing-plans": "allow",
-      "writing-skills": "allow"
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": false
+      },
+      "sequential-thinking": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking"
+        ],
+        "disabled": false
+      }
     }
   },
-  "agent": {
+  "permissions": [
+    { "action": "skill", "resource": "*", "effect": "deny" },
+    { "action": "skill", "resource": "customize-opencode", "effect": "allow" },
+    { "action": "skill", "resource": "context7-mcp", "effect": "allow" },
+    // ! when superpowers adds a skill, add it to this list
+    { "action": "skill", "resource": "brainstorming", "effect": "allow" },
+    { "action": "skill", "resource": "dispatching-parallel-agents", "effect": "allow" },
+    { "action": "skill", "resource": "executing-plans", "effect": "allow" },
+    { "action": "skill", "resource": "finishing-a-development-branch", "effect": "allow" },
+    { "action": "skill", "resource": "receiving-code-review", "effect": "allow" },
+    { "action": "skill", "resource": "requesting-code-review", "effect": "allow" },
+    { "action": "skill", "resource": "subagent-driven-development", "effect": "allow" },
+    { "action": "skill", "resource": "systematic-debugging", "effect": "allow" },
+    { "action": "skill", "resource": "test-driven-development", "effect": "allow" },
+    { "action": "skill", "resource": "using-git-worktrees", "effect": "allow" },
+    { "action": "skill", "resource": "using-superpowers", "effect": "allow" },
+    { "action": "skill", "resource": "verification-before-completion", "effect": "allow" },
+    { "action": "skill", "resource": "writing-plans", "effect": "allow" },
+    { "action": "skill", "resource": "writing-skills", "effect": "allow" }
+  ],
+  "agents": {
     "plan": {
-      "permission": {}
+      "permissions": []
     },
     "explore": {
-      "permission": {}
+      "permissions": []
     },
     "general": {
-      "permission": {}
+      "permissions": []
     },
     "build": {}
   }
