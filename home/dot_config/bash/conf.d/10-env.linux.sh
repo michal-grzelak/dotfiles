@@ -3,4 +3,7 @@
 export GPG_TTY=$(tty)
 
 # Forward ssh to 1Pass socket
-export SSH_AUTH_SOCK=~/.1password/agent.sock
+# export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+# Forward ssh to ProtonPass socket
+export SSH_AUTH_SOCK=~/.ssh/proton-pass-ssh-agent.sock

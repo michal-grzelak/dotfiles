@@ -1,6 +1,6 @@
 # MANAGED BY CHEZMOI! EDIT ONLY WITH: chezmoi edit
 
-{{ include "private_dot_ssh/config.common" }}
+{{ includeTemplate "private_dot_ssh/config.common.tmpl" }}
 
 {{- if eq .chezmoi.os "linux" }}
 

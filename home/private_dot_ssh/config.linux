@@ -1,4 +1,4 @@
 # Linux configuration
 
 # 1Password bookmark config
-Include ~/.ssh/1Password/config
+# Include ~/.ssh/1Password/config
